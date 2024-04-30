@@ -4,16 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BMI Rechner</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <style>
-    body {
-      padding-top: 56px;
-    }
+    /* Custom CSS für zusätzliche Stile */
+    /* Hier kannst du deine benutzerdefinierten Styles hinzufügen */
   </style>
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="#">BMI Rechner</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -30,48 +31,44 @@
   </div>
 </nav>
 
-<div id="home" class="container mt-5">
-  <h1>Body-Mass-Index (BMI)</h1>
-  <p>Der Body-Mass-Index (BMI) ist eine Maßzahl zur Bewertung des Körpergewichts eines Menschen in Relation zu seiner Körpergröße.</p>
-  <img src="bmi_image.jpg" class="img-fluid" alt="BMI Illustration">
-</div>
+<!-- Home-Seite -->
+<section id="home" class="container mt-5">
+  <h1>Willkommen zum BMI Rechner</h1>
+  <p>Hier findest du Informationen zur BMI-Berechnung.</p>
+  <img src="bmi_formel.jpg" alt="BMI Formel" class="img-fluid">
+</section>
 
-<div id="berechnung" class="container mt-5" style="display: none;">
-  <h2>BMI Berechnen</h2>
+<!-- Berechnung-Seite -->
+<section id="berechnung" class="container mt-5 d-none">
+  <h1>BMI Berechnen</h1>
   <form id="bmiForm">
     <div class="form-group">
       <label for="gewicht">Gewicht (kg):</label>
       <input type="number" class="form-control" id="gewicht" required>
     </div>
     <div class="form-group">
-      <label for="groesse">Größe (m):</label>
+      <label for="groesse">Größe (cm):</label>
       <input type="number" class="form-control" id="groesse" required>
     </div>
     <button type="submit" class="btn btn-primary">BMI Berechnen</button>
   </form>
   <div id="ergebnis" class="mt-3"></div>
-</div>
+</section>
 
+<!-- Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    var url = window.location.href;
-    if (url.indexOf("#berechnung") != -1) {
-      document.getElementById("home").style.display = "none";
-      document.getElementById("berechnung").style.display = "block";
-    }
-  });
-
-  document.getElementById('bmiForm').addEventListener('submit', function(e) {
-    e.preventDefault();
+  // JavaScript für die BMI-Berechnung
+  document.getElementById('bmiForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Verhindert das Neuladen der Seite beim Absenden des Formulars
     var gewicht = parseFloat(document.getElementById('gewicht').value);
-    var groesse = parseFloat(document.getElementById('groesse').value);
+    var groesse = parseFloat(document.getElementById('groesse').value) / 100; // Umrechnung von cm in m
     var bmi = gewicht / (groesse * groesse);
-    document.getElementById('ergebnis').innerHTML = '<h3>Ihr BMI beträgt: ' + bmi.toFixed(2) + '</h3>';
+    var ergebnis = document.getElementById('ergebnis');
+    ergebnis.innerHTML = '<h3>Ihr BMI beträgt: ' + bmi.toFixed(2) + '</h3>';
   });
 </script>
-
 </body>
 </html>
